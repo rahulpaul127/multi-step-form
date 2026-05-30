@@ -1,0 +1,794 @@
+    @font-face {
+      font-family: "Ubuntu";
+      src: url("./assets/fonts/Ubuntu-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Ubuntu";
+      src: url("./assets/fonts/Ubuntu-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Ubuntu";
+      src: url("./assets/fonts/Ubuntu-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --blue-950: hsl(213, 96%, 18%);
+      --purple-600: hsl(243, 100%, 62%);
+      --blue-300: hsl(228, 100%, 84%);
+      --blue-200: hsl(206, 94%, 87%);
+      --red-500: hsl(354, 84%, 57%);
+      --grey-500: hsl(231, 11%, 63%);
+      --purple-200: hsl(229, 24%, 87%);
+      --blue-100: hsl(218, 100%, 97%);
+      --blue-50: hsl(231, 100%, 99%);
+      --white: hsl(0, 100%, 100%);
+      --field-border: hsl(231, 23%, 87%);
+      --shadow: 0 25px 50px rgba(13, 48, 88, 0.095);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--blue-100);
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      background: var(--blue-100);
+      color: var(--blue-950);
+      font-family: "Ubuntu", Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app {
+      width: min(940px, calc(100vw - 32px));
+      min-height: 600px;
+      padding: 16px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 274px 1fr;
+      border-radius: 15px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      width: 274px;
+      min-height: 568px;
+      padding: 40px 32px;
+      border-radius: 10px;
+      background: url("./assets/images/bg-sidebar-desktop.svg") center / cover no-repeat;
+    }
+
+    .steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 29px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .step-number {
+      width: 33px;
+      height: 33px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 33px;
+      border: 1px solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .step-item[aria-current="step"] .step-number {
+      border-color: var(--blue-200);
+      background: var(--blue-200);
+      color: var(--blue-950);
+    }
+
+    .step-kicker {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--blue-300);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .step-title {
+      display: block;
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .panel {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      min-height: 568px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step-panel {
+      display: none;
+    }
+
+    .step-panel.is-active {
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--blue-950);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.16;
+    }
+
+    .intro {
+      margin: 9px 0 0;
+      color: var(--grey-500);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .personal-fields {
+      margin-top: 34px;
+      display: grid;
+      gap: 23px;
+    }
+
+    .field-heading {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--blue-950);
+      font-size: 0.875rem;
+      line-height: 1;
+    }
+
+    .error {
+      color: var(--red-500);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .text-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 15px;
+      border: 1px solid var(--field-border);
+      border-radius: 8px;
+      outline: 0;
+      color: var(--blue-950);
+      background: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .text-input::placeholder {
+      color: var(--grey-500);
+      opacity: 1;
+    }
+
+    .text-input:hover,
+    .text-input:focus {
+      border-color: var(--purple-600);
+    }
+
+    .text-input[aria-invalid="true"] {
+      border-color: var(--red-500);
+    }
+
+    .plan-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .plan-card {
+      min-height: 160px;
+      padding: 20px 15px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid var(--field-border);
+      border-radius: 8px;
+      background: var(--white);
+      text-align: left;
+      color: var(--blue-950);
+    }
+
+    .plan-card:hover,
+    .plan-card:focus-visible,
+    .plan-card.is-selected {
+      border-color: var(--purple-600);
+    }
+
+    .plan-card.is-selected {
+      background: var(--blue-50);
+    }
+
+    .plan-card img {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+    }
+
+    .plan-details {
+      margin-top: auto;
+    }
+
+    .plan-name {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .plan-price {
+      display: block;
+      color: var(--grey-500);
+      font-size: 0.875rem;
+      line-height: 1;
+    }
+
+    .plan-free {
+      display: none;
+      margin-top: 8px;
+      color: var(--blue-950);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .is-yearly .plan-card {
+      min-height: 183px;
+    }
+
+    .is-yearly .plan-free {
+      display: block;
+    }
+
+    .billing-toggle {
+      height: 48px;
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      border-radius: 8px;
+      background: var(--blue-50);
+    }
+
+    .billing-option {
+      color: var(--grey-500);
+      background: transparent;
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .billing-option.is-active {
+      color: var(--blue-950);
+    }
+
+    .switch {
+      position: relative;
+      width: 38px;
+      height: 20px;
+      padding: 0;
+      border-radius: 999px;
+      background: var(--blue-950);
+    }
+
+    .switch::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--white);
+      transition: transform 180ms ease;
+    }
+
+    .is-yearly .switch::before {
+      transform: translateX(18px);
+    }
+
+    .addon-list {
+      margin-top: 40px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .addon-card {
+      min-height: 80px;
+      padding: 0 23px;
+      display: grid;
+      grid-template-columns: 20px 1fr auto;
+      align-items: center;
+      column-gap: 24px;
+      border: 1px solid var(--field-border);
+      border-radius: 8px;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .addon-card:hover,
+    .addon-card:focus-within,
+    .addon-card.is-selected {
+      border-color: var(--purple-600);
+    }
+
+    .addon-card.is-selected {
+      background: var(--blue-50);
+    }
+
+    .addon-checkbox {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      appearance: none;
+      border: 1px solid var(--field-border);
+      border-radius: 4px;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .addon-checkbox:checked {
+      border-color: var(--purple-600);
+      background: var(--purple-600) url("./assets/images/icon-checkmark.svg") center / 12px 9px no-repeat;
+    }
+
+    .addon-name {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--blue-950);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .addon-description {
+      display: block;
+      color: var(--grey-500);
+      font-size: 0.9375rem;
+      line-height: 1;
+    }
+
+    .addon-price {
+      color: var(--purple-600);
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .summary-card {
+      margin-top: 40px;
+      padding: 20px 24px 22px;
+      border-radius: 8px;
+      background: var(--blue-50);
+    }
+
+    .summary-plan,
+    .summary-row,
+    .total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .summary-plan-name {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .summary-price {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .change-button {
+      padding: 0;
+      color: var(--grey-500);
+      background: transparent;
+      font-size: 0.875rem;
+      line-height: 1;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .change-button:hover,
+    .change-button:focus-visible {
+      color: var(--purple-600);
+    }
+
+    .divider {
+      height: 1px;
+      margin: 22px 0 17px;
+      background: var(--purple-200);
+      opacity: 0.75;
+    }
+
+    .summary-addons {
+      display: grid;
+      gap: 17px;
+    }
+
+    .summary-row {
+      color: var(--grey-500);
+      font-size: 0.875rem;
+      line-height: 1;
+    }
+
+    .summary-row-price {
+      color: var(--blue-950);
+      font-weight: 400;
+    }
+
+    .total-row {
+      margin: 24px 24px 0;
+      color: var(--grey-500);
+      font-size: 0.875rem;
+      line-height: 1;
+    }
+
+    .total-price {
+      color: var(--purple-600);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .thanks {
+      min-height: 568px;
+      padding: 0 0 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .thanks img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 32px;
+    }
+
+    .thanks h1 {
+      margin-bottom: 12px;
+    }
+
+    .thanks .intro {
+      max-width: 450px;
+      margin: 0;
+    }
+
+    .actions {
+      position: absolute;
+      right: 0;
+      bottom: 16px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .actions.is-hidden {
+      display: none;
+    }
+
+    .nav-button {
+      min-width: 123px;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--blue-950);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: auto;
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible {
+      background: hsl(213, 76%, 31%);
+    }
+
+    .nav-button.confirm {
+      background: var(--purple-600);
+    }
+
+    .nav-button.confirm:hover,
+    .nav-button.confirm:focus-visible {
+      background: hsl(243, 100%, 77%);
+    }
+
+    .back-button {
+      padding: 0;
+      color: var(--grey-500);
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: auto;
+    }
+
+    .back-button:hover,
+    .back-button:focus-visible {
+      color: var(--blue-950);
+    }
+
+    .back-button.is-hidden {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .attribution {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        min-height: 100svh;
+        display: block;
+      }
+
+      .app {
+        width: 100%;
+        min-height: 100svh;
+        padding: 0;
+        display: block;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: 172px;
+        padding: 32px 0 0;
+        border-radius: 0;
+        background-image: url("./assets/images/bg-sidebar-mobile.svg");
+        background-position: center top;
+      }
+
+      .steps {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .step-copy {
+        display: none;
+      }
+
+      .panel {
+        width: auto;
+        min-height: 0;
+        margin: -73px 16px 96px;
+        padding: 31px 24px 32px;
+        border-radius: 10px;
+        background: var(--white);
+        box-shadow: 0 24px 40px rgba(13, 48, 88, 0.08);
+      }
+
+      .step-panel {
+        padding-top: 0;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .intro {
+        margin-top: 9px;
+        line-height: 1.55;
+      }
+
+      .personal-fields {
+        margin-top: 21px;
+        gap: 14px;
+      }
+
+      .field-heading {
+        margin-bottom: 6px;
+        font-size: 0.75rem;
+      }
+
+      .text-input {
+        height: 40px;
+        padding: 0 15px;
+        border-radius: 4px;
+        font-size: 0.9375rem;
+      }
+
+      .plan-grid {
+        margin-top: 24px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .plan-card,
+      .is-yearly .plan-card {
+        min-height: 77px;
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .is-yearly .plan-card {
+        min-height: 99px;
+      }
+
+      .plan-details {
+        margin-top: 0;
+      }
+
+      .plan-free {
+        margin-top: 7px;
+      }
+
+      .billing-toggle {
+        margin-top: 24px;
+      }
+
+      .addon-list {
+        margin-top: 24px;
+        gap: 12px;
+      }
+
+      .addon-card {
+        min-height: 63px;
+        padding: 0 15px;
+        grid-template-columns: 20px minmax(0, 1fr) auto;
+        column-gap: 16px;
+        border-radius: 8px;
+      }
+
+      .addon-name {
+        margin-bottom: 5px;
+        font-size: 0.875rem;
+      }
+
+      .addon-description,
+      .addon-price {
+        font-size: 0.75rem;
+      }
+
+      .summary-card {
+        margin-top: 24px;
+        padding: 18px 16px 19px;
+      }
+
+      .summary-plan-name,
+      .summary-price {
+        font-size: 0.875rem;
+      }
+
+      .divider {
+        margin: 15px 0 16px;
+      }
+
+      .summary-addons {
+        gap: 16px;
+      }
+
+      .total-row {
+        margin: 25px 16px 0;
+      }
+
+      .total-price {
+        font-size: 1rem;
+      }
+
+      .thanks {
+        min-height: 337px;
+        padding: 46px 0 48px;
+      }
+
+      .thanks img {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 25px;
+      }
+
+      .thanks h1 {
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+        height: 72px;
+        padding: 16px;
+        background: var(--white);
+      }
+
+      .nav-button {
+        min-width: 97px;
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 4px;
+        font-size: 0.875rem;
+      }
+
+      .back-button {
+        font-size: 0.875rem;
+      }
+    }
