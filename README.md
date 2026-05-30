@@ -19,7 +19,7 @@ This is a solution to the [Multi-step form challenge on Frontend Mentor](https:/
 
 ### Screenshot
 
-| ![Desktop design](./design/desktop-design.jpg) | ![Mobile design](./design/mobile-design.jpg) |
+| ![Desktop design](./design/desktop-design-step-1.jpg) | ![Mobile design](./design/mobile-design-step-1.jpg) |
 | :--: | :--: |
 | Desktop | Mobile |
 
